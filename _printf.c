@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 			{
 				if (format[i + 1] == array_of_format_types[j].type || j == 2)
 				{
-					array_of_format_types[j].func(arg);
+					array_of_format_types[j].func(&arg);
 					i += 2;
 				}
 				j++;
@@ -46,6 +46,6 @@ int _printf(const char *format, ...)
 	}
 	va_end(arg);
 	len = i;
-	_putchar(\n);
+	_putchar('\n');
 	return (len);
 }
