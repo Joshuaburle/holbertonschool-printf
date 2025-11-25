@@ -23,16 +23,8 @@ void _print_str (va_list *arg)
 	}
 }
 
-void _print_percentage_or_unknown (va_list *arg)
+void _print_percentage (va_list *arg)
 {
-	if (va_arg(*arg, int) == '%')
-	{
-		_putchar('%');
-	}
-	else
-	{
-		char unknown = va_arg(*arg, int);
-		_putchar('%');
-		_putchar(unknown);
-	}
+	(void)arg;
+	_putchar('%');
 }
