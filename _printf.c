@@ -17,9 +17,9 @@ int _printf(const char *format, ...)
 	va_list arg;
 	int i = 0, j, len;
 	printer array_of_format_types[] = {
-		{'c', print_char},
-		{'s', print_str},
-		{'%', print_percentage_or_unknown}
+		{'c', _print_char},
+		{'s', _print_str},
+		{'%', _print_percentage_or_unknown}
 	};
 	va_start(arg, format);
 
