@@ -15,7 +15,7 @@
 int _printf(const char *format, ...)
 {
 	va_list arg;
-	int i = 0, j, len;
+	int i = 0, j, len, found = 0;
 	printer array_of_format_types[] = {
 		{'c', _print_char}, {'s', _print_str}, {'%', _print_percentage},
 		{'\0', NULL} };
@@ -34,19 +34,22 @@ int _printf(const char *format, ...)
 			while (array_of_format_types[j].type != '\0')
 			{
 				if (format[i + 1] == array_of_format_types[j].type)
-					array_of_format_types[j].func(&arg);
-				j++;
-				if (array_of_format_types[j].type == '\0')
 				{
-					_putchar('%');
-					_putchar(format[i + 1]);
+					array_of_format_types[j].func(&arg);
+					found = 1;
+					break;
 				}
+				j++;
+			}
+			if (!found)
+			{
+				_putchar('%');
+				_putchar(format[i + 1]);
 			}
 			i+=2;
 		}
 	}
 	va_end(arg);
 	len = i;
-	_putchar('\n');
 	return (len);
 }
