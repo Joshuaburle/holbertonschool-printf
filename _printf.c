@@ -50,6 +50,6 @@ int _printf(const char *format, ...)
 		}
 	}
 	va_end(arg);
-	len = i;
+	len = i - 1;
 	return (len);
 }
