@@ -39,17 +39,14 @@ int _print_str(va_list *arg, char next_char)
 	char *str = va_arg(*arg, char *);
 	(void)next_char;
 
-	if (str != NULL)
+	if (!str)
+		return (0);
+
+	while (str[i] != '\0')
 	{
-		while (str[i] != '\0')
-		{
-			_putchar (str[i]);
-			i++;
-		}
-		return (i);
+		_putchar (str[i]);
+		i++;
 	}
-	else
-		write(1, "(null)", 6);
 	return (6);
 }
 
