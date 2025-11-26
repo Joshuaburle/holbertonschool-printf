@@ -46,7 +46,7 @@ int _printf(const char *format, ...)
 				_putchar('%');
 				_putchar(format[i + 1]);
 			}
-			i+=2;
+			i += 2;
 		}
 	}
 	va_end(arg);
