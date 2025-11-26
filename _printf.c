@@ -45,7 +45,7 @@ int _printf(const char *format, ...)
 			{
 				_putchar('%');
 				_putchar(format[i + 1]);
-				len += 2
+				len += 2;
 			}
 			i += 2;
 		}
