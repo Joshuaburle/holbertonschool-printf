@@ -47,7 +47,7 @@ int _print_str(va_list *arg, char next_char)
 		_putchar (str[i]);
 		i++;
 	}
-	return (6);
+	return (i);
 }
 
 /**
