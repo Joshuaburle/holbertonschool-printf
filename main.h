@@ -7,6 +7,8 @@ int _printf(const char *format, ...);
 int _print_char(va_list *arg, char next_char);
 int _print_str(va_list *arg, char next_char);
 int _print_percentage_or_unknown(va_list *arg, char next_char);
+int _print_int(va_list *arg, char next_char);
+int _print_recursive_number(int num);
 int _putchar(char c);
 
 /**

@@ -66,6 +66,7 @@ int _print_str(va_list *arg, char next_char)
 int _print_percentage_or_unknown(va_list *arg, char next_char)
 {
 	(void)arg;
+
 	if (next_char == '\0')
 		return (0);
 	else if (next_char == '%')
@@ -79,4 +80,36 @@ int _print_percentage_or_unknown(va_list *arg, char next_char)
 		_putchar(next_char);
 		return (2);
 	}
+}
+
+int _print_recursive_number(int num)
+{
+	int len = 0;
+
+	if (num >= 10)
+		len += _print_recursive_number(num / 10);
+	_putchar(num % 10 + '0');
+	len++;
+	return (len);
+}
+
+int _print_int(va_list *arg, char next_char)
+{
+	int number, len = 0;
+	(void)next_char;
+
+	number = va_arg(*arg, int);
+	if (number < 0)
+	{
+		_putchar('-');
+		len = 1;
+		if (number == INT_MIN)
+		{
+			write(1, "2147483648", 10);
+			return (len += 10);
+		}
+		number = -number;
+	}
+	len += _print_recursive_number(number);
+	return (len);
 }
