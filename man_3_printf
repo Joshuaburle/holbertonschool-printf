@@ -1,0 +1,108 @@
+.TH _PRINTF 3 "27 November 2025" "version 1.0" "User Commands"
+.SH NAME
+_printf \- simplified formatted output function (educational)
+.SH SYNOPSIS
+.nf
+#include "main.h"
+int _printf(const char *format, ...);
+.fi
+.SH DESCRIPTION
+\fB_printf\fR is a small educational reimplementation of the standard
+C library function \fBprintf(3)\fR. It parses a format string and writes
+formatted output to standard output. This implementation intentionally
+supports a limited subset of conversion specifiers; behaviour for other
+features of the full `printf` (flags, field width, precision, length
+modifiers) is not provided.
+
+.SH CONVERSION SPECIFIERS
+The following conversion specifiers are supported by this implementation:
+.TP
+\fI%c\fR
+Print a single character. The corresponding argument is converted to
+\fIunsigned char\fR and printed.
+.TP
+\fI%s\fR
+Print a NUL-terminated string. If a NULL pointer is supplied the
+implementation writes the 6-character string `(null)`.
+.
+.TP
+\fI%d, %i\fR
+Print a signed decimal integer. Negative values are printed with a
+leading `-`. `INT_MIN` is handled specially to avoid overflow when
+negating it.
+
+.TP
+\fI%%\fR
+Print a literal percent sign.
+
+.SH RETURN VALUE
+On success, \fB_printf\fR returns the number of bytes written to
+standard output. On error (for example, when \fIformat\fR is NULL, or
+when the format string ends with an unmatched `%' character) the
+function returns \fB-1\fR.
+
+.SH ERRORS
+This implementation does not set \fIerrno\fR for formatting errors.
+Invalid or unsupported conversion sequences are printed as a percent
+sign followed by the unknown character (for example, `"%q"` prints
+`%q`). If the format string ends with a single `%' (no conversion
+character after it), `_printf` returns `-1`.
+
+.SH EXAMPLES
+.PP
+.B Character
+.nf
+_printf("I'm the letter: %c\n", 'A');
+/* Output: I'm the letter: A */
+.fi
+.PP
+.B String
+.nf
+_printf("I'm a %s!\n", "string");
+/* Output: I'm a string! */
+.fi
+.PP
+.B Percent sign
+.nf
+_printf("Progress: 100%%\n");
+/* Output: Progress: 100% */
+.fi
+.PP
+.B Integer
+.nf
+_printf("Number: %d\n", 123);
+/* Output: Number: 123 */
+.fi
+.PP
+.B NULL string handling
+.nf
+_printf("Null: %s\n", NULL);
+/* Output: Null: (null) */
+.fi
+.PP
+.B Unknown specifier
+.nf
+_printf("Unknown: %q\n");
+/* Output: Unknown: %q */
+.fi
+
+.SH IMPLEMENTATION NOTES
+.IP \(bu 2
+This project uses a small dispatch table (`printer array`) mapping
+conversion characters to handler functions. Handler function prototypes
+are declared in `main.h`.
+.IP \(bu 2
+Variadic arguments are accessed with `stdarg.h` macros (`va_start`,
+`va_arg`, `va_end`).
+.IP \(bu 2
+A helper `_putchar` wraps the `write` system call to emit one character
+to standard output (see `_putchar.c`).
+
+.SH SEE ALSO
+.BR printf (3)
+.SH AUTHORS
+Joan FAROUX, Joshua BURLE
+.SH COPYRIGHT
+This manual page and implementation are provided for educational
+purposes as part of a Holberton School project. See the repository for
+license details.
