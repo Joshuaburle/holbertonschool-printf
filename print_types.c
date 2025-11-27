@@ -40,8 +40,10 @@ int _print_str(va_list *arg, char next_char)
 	(void)next_char;
 
 	if (!str)
-		return (0);
-
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while (str[i] != '\0')
 	{
 		_putchar (str[i]);
