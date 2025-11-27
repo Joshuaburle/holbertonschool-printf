@@ -100,7 +100,6 @@ _putchar.c
 main.h
 print_types.c
 man_3_printf
-test.c
 image/
 ```
 
