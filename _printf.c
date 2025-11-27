@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 		{'%', _print_percentage_or_unknown}, {'\0', NULL} };
 	va_start(arg, format);
 
-	while (format != NULL && format[i] != '\0')
+	while (format[i])
 	{
 		if (format[i] != '%')
 		{
@@ -30,6 +30,11 @@ int _printf(const char *format, ...)
 		else
 		{
 			j = 0, found = 0;
+			if (format[i + 1] == '\0')
+			{
+				i++;
+				continue;
+			}
 			while (array_of_format_types[j].type != '\0')
 			{
 				if (format[i + 1] == array_of_format_types[j].type)
@@ -40,7 +45,7 @@ int _printf(const char *format, ...)
 				}
 				j++;
 			}
-			if (!found && format[i + 1] != '\0')
+			if (!found)
 				len += _print_percentage_or_unknown(NULL, format[i + 1]);
 			i += 2;
 		}
