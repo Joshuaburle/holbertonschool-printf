@@ -24,13 +24,14 @@ int _print_char (va_list *arg, char next_char)
 }
 
 /**
- * _print_str - A function printing a string.
- * @arg: The string to print.
- * @next_char: the letter used after '%'
+ * _print_str - Prints a string.
+ * @arg: Pointer to the variadic argument list.
+ * @next_char: The format specifier character (after '%'), unused here.
  *
- * Description: _print_str prints a string. It's a function created for _printf
+ * Description: Extracts a string from the variadic arguments and prints it.
+ * If the string is NULL, prints "(null)" instead.
  *
- * Return: it returns the lenght of the string.
+ * Return: Returns the length of the printed string.
  */
 
 int _print_str(va_list *arg, char next_char)
@@ -53,14 +54,16 @@ int _print_str(va_list *arg, char next_char)
 }
 
 /**
- * _print_percentage_or_unknown - A function printing % or unknown char.
- * @arg: There is no variadic argument given for this function so it's void.
- * @next_char: the letter used after '%'
+ * _print_percentage_or_unknown - Prints '%' or an unknown format.
+ * @arg: Not used.
+ * @next_char: The character after '%'.
  *
- * Description: this function manage if the next char is null
- * or prints it if it's not null
+ * Description: If the next character is '%', prints '%'.
+ * Otherwise, prints '%' followed by the unknown character.
  *
- * Return: it returns 1 or 2 depending on the lenght.
+ * Return: 1 if only '%' was printed, 2 if '%'
+ * and an unknown character were printed,
+ * 0 if next_char is '\0'.
  */
 
 int _print_percentage_or_unknown(va_list *arg, char next_char)
@@ -82,6 +85,16 @@ int _print_percentage_or_unknown(va_list *arg, char next_char)
 	}
 }
 
+/**
+ * _print_recursive_number - Prints an integer recursively.
+ * @num: The non-negative integer to print.
+ *
+ * Description: Recursively prints each digit of num
+ * from most significant to least.
+ *
+ * Return: Returns the number of characters printed.
+ */
+
 int _print_recursive_number(int num)
 {
 	int len = 0;
@@ -92,6 +105,17 @@ int _print_recursive_number(int num)
 	len++;
 	return (len);
 }
+
+/**
+ * _print_int - Prints a signed integer.
+ * @arg: Pointer to the variadic argument list.
+ * @next_char: The format specifier character (after '%'), unused here.
+ *
+ * Description: Extracts an integer from the variadic arguments and prints it.
+ * Handles negative numbers, including INT_MIN.
+ *
+ * Return: Returns the total number of characters printed.
+ */
 
 int _print_int(va_list *arg, char next_char)
 {
