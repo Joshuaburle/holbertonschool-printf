@@ -33,8 +33,7 @@ int _printf(const char *format, ...)
 			found = 0;
 			if (format[i + 1] == '\0')
 			{
-				i++;
-				continue;
+				return (0);
 			}
 			for (j = 0; array_of_format_types[j].type != '\0'; j++)
 			{
