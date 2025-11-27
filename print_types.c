@@ -71,9 +71,7 @@ int _print_percentage_or_unknown(va_list *arg, char next_char)
 {
 	(void)arg;
 
-	if (next_char == '\0')
-		return (0);
-	else if (next_char == '%')
+	if (next_char == '%')
 	{
 		_putchar('%');
 		return (1);
